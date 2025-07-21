@@ -4,6 +4,10 @@
 #include "esphome/core/component.h"
 #include "esphome/components/uart/uart.h"
 
+#ifndef u_int32_t
+#define u_int32_t uint32_t
+#endif
+
 #ifdef USE_ESP32
 #include <freertos/FreeRTOS.h>
 #include <freertos/semphr.h>
