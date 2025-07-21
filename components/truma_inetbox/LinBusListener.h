@@ -7,6 +7,10 @@
 #ifndef u_int32_t
 #define u_int32_t uint32_t
 #endif
+#ifndef u_int8_t
+#define u_int8_t uint8_t
+#endif
+
 
 #ifdef USE_ESP32
 #include <freertos/FreeRTOS.h>
