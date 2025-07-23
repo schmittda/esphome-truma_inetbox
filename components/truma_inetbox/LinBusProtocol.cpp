@@ -40,7 +40,10 @@ bool LinBusProtocol::answer_lin_order_(const u_int8_t pid) {
 }
 
 void LinBusProtocol::lin_message_recieved_(const u_int8_t pid, const u_int8_t *message, u_int8_t length) {
-  if (pid == DIAGNOSTIC_FRAME_MASTER) {
+  ESP_LOGV(TAG, "Processing LIN frame PID %02X  Data: %s Length: %u", pid, format_hex_pretty(message, length).c_str(), length);
+
+    
+    if (pid == DIAGNOSTIC_FRAME_MASTER) {
     // The original Inet Box is answering this message. Works fine without.
     // std::array<u_int8_t, 8> message_array = {};
     // std::copy(message, message + length, message_array.begin());
