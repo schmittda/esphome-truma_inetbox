@@ -17,27 +17,6 @@ TrumaiNetBoxApp::TrumaiNetBoxApp() {
   this->heater_.set_parent(this);
   this->timer_.set_parent(this);
 }
-void TrumaiNetBoxApp::lin_message_recieved_(const u_int8_t pid, const u_int8_t *message, u_int8_t length) {
-  ESP_LOGD(TAG, "lin_message_recieved_: PID=%02X Length=%d Data=%s", pid, length, format_hex_pretty(message, length).c_str());
-
-  if (pid == 0x3C && length >= 1) {
-    uint8_t pci = message[0];
-
-    if ((pci & 0xF0) == 0x10) {
-      ESP_LOGD(TAG, "First Frame (0x10) detected, calling lin_msg_diag_first_");
-      this->lin_msg_diag_first_(message, length);
-    } else if ((pci & 0xF0) == 0x20) {
-      ESP_LOGD(TAG, "Consecutive Frame (0x2X) detected, calling lin_msg_diag_consecutive_");
-      this->lin_msg_diag_consecutive_(message, length);
-    } else {
-      ESP_LOGD(TAG, "Single Frame detected, calling lin_msg_diag_single_");
-      this->lin_msg_diag_single_(message, length);
-    }
-  } else {
-    ESP_LOGV(TAG, "Unrecognized or irrelevant PID: %02X", pid);
-  }
-}
-
 
 void TrumaiNetBoxApp::update() {
   // Call listeners in after method 'lin_multiframe_recieved' call.
