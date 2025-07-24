@@ -3,10 +3,6 @@
 #include <queue>
 #include "LinBusListener.h"
 
-#ifndef u_int16_t
-#define u_int16_t uint16_t
-#endif
-
 namespace esphome {
 namespace truma_inetbox {
 class LinBusProtocol : public LinBusListener {
