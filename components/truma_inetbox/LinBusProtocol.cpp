@@ -139,7 +139,9 @@ void LinBusProtocol::lin_msg_diag_single_(const u_int8_t *message, u_int8_t leng
         response[3] = LIN_SID_READ_BY_IDENTIFIER;
         response[4] = 0x12;
       }
-      this->prepare_update_msg_(response);
+        ESP_LOGVV(TAG, "Single Frame Mode SID_READ_BY_IDENTIFIER Detected.");
+        
+        this->prepare_update_msg_(response);
     }
   } else if (my_node_address && service_identifier == LIN_SID_HEARTBEAT && message_length >= 5) {
     // if (message[3] == 0x00 && message[4] == 0x1F && message[5] == 0x00 && message[6] == 0x00) {
@@ -149,7 +151,9 @@ void LinBusProtocol::lin_msg_diag_single_(const u_int8_t *message, u_int8_t leng
     response[2] = LIN_SID_HEARTBEAT_RESPONSE;
     response[3] = 0x00;
     this->prepare_update_msg_(response);
-
+      
+    ESP_LOGVV(TAG, "Single Frame Mode Heartbeat Detected.");
+      
     this->lin_heartbeat();
     //}
   } else if (broadcast_address && service_identifier == LIN_SID_ASSIGN_NAD && message_length == 6) {
