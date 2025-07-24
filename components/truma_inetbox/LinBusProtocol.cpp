@@ -104,7 +104,7 @@ void LinBusProtocol::lin_msg_diag_single_(const u_int8_t *message, u_int8_t leng
   // auto node_address = message[0];
   bool my_node_address = message[0] == this->lin_node_address_;
   bool broadcast_address = message[0] == LIN_NAD_BROADCAST;
-
+        ESP_LOGVV(TAG, "lin_msg_diag_single_ Entered");
   u_int8_t message_length = message[1];
   u_int8_t service_identifier = message[2];
   if (message_length > 6) {
