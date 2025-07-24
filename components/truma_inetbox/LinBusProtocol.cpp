@@ -70,6 +70,7 @@ void LinBusProtocol::lin_message_recieved_(const u_int8_t pid, const u_int8_t *m
     }
     u_int8_t protocol_control_information = message[1];
     if ((protocol_control_information & 0xF0) == 0x00) {
+        ESP_LOGVV(TAG, "Single Frame Node Detected.");
       // Single Frame mode
       {
         // End any open Multi frame mode message
